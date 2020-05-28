@@ -4,4 +4,4 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import Movies from "./components/Movies";
 
-ReactDOM.render(<Movies />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
