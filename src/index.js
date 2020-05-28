@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import 'bootstrap/dist/css/bootstrap.css';
-import Counter from './components/Counter'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.css";
+import Movies from "./components/Movies";
 
-ReactDOM.render(<Counter />, document.getElementById('root'));
+ReactDOM.render(<Movies />, document.getElementById("root"));
