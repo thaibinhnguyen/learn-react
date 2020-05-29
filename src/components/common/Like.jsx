@@ -3,12 +3,12 @@ import React, { Component } from "react";
 // Input: liked: boolean
 // Output: onClick
 
-export default function Like({ liked, onClick }) {
+export default function Like({ liked, onLike }) {
     let classes = "fa fa-heart";
     if (!liked) classes += "-o";
     return (
         <i
-            onClick={onClick}
+            onClick={onLike}
             style={{ cursor: "pointer" }}
             className={classes}
             aria-hidden="true"

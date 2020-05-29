@@ -48,7 +48,7 @@ export default class Movies extends Component {
                                 <td>{movie.rate}</td>
                                 <td>
                                     <Like
-                                        onClick={() => this.handleLike(movie)}
+                                        onLike={() => this.handleLike(movie)}
                                         liked={movie.liked}
                                     />
                                 </td>
