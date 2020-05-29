@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Like from "./common/Like";
 import { getMovie, getMovies } from "./fakeGenreService";
 
 export default class Movies extends Component {
@@ -14,6 +15,13 @@ export default class Movies extends Component {
             movies: listMovies,
         });
     };
+    handleLike = (movie) => {
+        console.log("clicked");
+        let movies = [...this.state.movies];
+        const index = movie.id - 1;
+        movies[index].liked = !movies[index].liked;
+        this.setState({ movies });
+    };
     render() {
         if (this.state.movies.length === 0)
             return <div>There're no movies</div>;
@@ -28,6 +36,7 @@ export default class Movies extends Component {
                             <th scope="col">Stock</th>
                             <th scope="col">Rate</th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +46,12 @@ export default class Movies extends Component {
                                 <td>{movie.genre}</td>
                                 <td>{movie.stock}</td>
                                 <td>{movie.rate}</td>
+                                <td>
+                                    <Like
+                                        onClick={() => this.handleLike(movie)}
+                                        liked={movie.liked}
+                                    />
+                                </td>
                                 <td>
                                     <button
                                         className="btn btn-danger"
