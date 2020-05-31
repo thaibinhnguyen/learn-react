@@ -1,33 +1,14 @@
 import React, { Component } from "react";
 import Like from "./common/Like";
-import { getMovie, getMovies } from "./fakeGenreService";
+
 
 export default class Movies extends Component {
-    state = {
-        movies: getMovies(),
-    };
-    handleDelete = (movie) => {
-        let movieDeleted = getMovie(movie.id);
-        let listMovies = this.state.movies.filter(
-            (movie) => movie.id !== movieDeleted.id
-        );
-        this.setState({
-            movies: listMovies,
-        });
-    };
-    handleLike = (movie) => {
-        console.log("clicked");
-        let movies = [...this.state.movies];
-        const index = movie.id - 1;
-        movies[index].liked = !movies[index].liked;
-        this.setState({ movies });
-    };
     render() {
-        if (this.state.movies.length === 0)
+        if (this.props.movies.length === 0)
             return <div>There're no movies</div>;
         return (
             <React.Fragment>
-                <span>There're {this.state.movies.length} movies</span>
+                <span>There're {this.props.movies.length} movies</span>
                 <table className="table">
                     <thead>
                         <tr>
@@ -40,7 +21,7 @@ export default class Movies extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.movies.map((movie) => (
+                        {this.props.movies.map((movie) => (
                             <tr key={movie.id}>
                                 <td>{movie.title}</td>
                                 <td>{movie.genre}</td>
@@ -48,14 +29,14 @@ export default class Movies extends Component {
                                 <td>{movie.rate}</td>
                                 <td>
                                     <Like
-                                        onLike={() => this.handleLike(movie)}
+                                        onLike={() => this.props.onLike(movie)}
                                         liked={movie.liked}
                                     />
                                 </td>
                                 <td>
                                     <button
                                         className="btn btn-danger"
-                                        onClick={() => this.handleDelete(movie)}
+                                        onClick={() => this.props.onDelete(movie)}
                                     >
                                         Delete
                                     </button>
