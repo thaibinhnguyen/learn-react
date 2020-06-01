@@ -1,13 +1,39 @@
 import React, { Component } from "react";
+import Pagination from "./common/Pagination";
+import { getMovies, getMovie } from "./fakeGenreService";
 import Like from "./common/Like";
 
 export default class Movies extends Component {
+    state = {
+        movies: getMovies(),
+        pageSize: 4,
+    };
+    handleDelete = (movie) => {
+        let movieDeleted = getMovie(movie.id);
+        let listMovies = this.state.movies.filter(
+            (movie) => movie.id !== movieDeleted.id
+        );
+        this.setState({
+            movies: listMovies,
+        });
+    };
+    handleLike = (movie) => {
+        console.log("clicked");
+        let movies = [...this.state.movies];
+        const index = movie.id - 1;
+        movies[index].liked = !movies[index].liked;
+        this.setState({ movies });
+    };
+    handlePageChange = (page) => {
+        console.log(page);
+    };
+
     render() {
-        if (this.props.movies.length === 0)
-            return <div>There're no movies</div>;
+        const { length: count } = this.state.movies;
+        if (count === 0) return <div>There're no movies</div>;
         return (
             <React.Fragment>
-                <span>There're {this.props.movies.length} movies</span>
+                <span>There're {count} movies</span>
                 <table className="table">
                     <thead>
                         <tr>
@@ -20,7 +46,7 @@ export default class Movies extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.movies.map((movie) => (
+                        {this.state.movies.map((movie) => (
                             <tr key={movie.id}>
                                 <td>{movie.title}</td>
                                 <td>{movie.genre}</td>
@@ -28,16 +54,14 @@ export default class Movies extends Component {
                                 <td>{movie.rate}</td>
                                 <td>
                                     <Like
-                                        onLike={() => this.props.onLike(movie)}
+                                        onLike={() => this.handleLike(movie)}
                                         liked={movie.liked}
                                     />
                                 </td>
                                 <td>
                                     <button
                                         className="btn btn-danger"
-                                        onClick={() =>
-                                            this.props.onDelete(movie)
-                                        }
+                                        onClick={() => this.handleDelete(movie)}
                                     >
                                         Delete
                                     </button>
@@ -46,6 +70,11 @@ export default class Movies extends Component {
                         ))}
                     </tbody>
                 </table>
+                <Pagination
+                    itemsCount={count}
+                    pageSize={this.state.pageSize}
+                    onPageChange={this.handlePageChange}
+                />
             </React.Fragment>
         );
     }
