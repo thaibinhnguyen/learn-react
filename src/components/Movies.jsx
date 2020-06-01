@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Pagination from "./common/Pagination";
-import { getMovies, getMovie } from "./fakeGenreService";
+import { getMovies, getMovie } from "./fakeMovieService";
 import PropTypes from "prop-types";
 import Like from "./common/Like";
 import { paginate } from "../utils/paginate";
@@ -39,6 +39,13 @@ export default class Movies extends Component {
         return (
             <React.Fragment>
                 <span>There're {count} movies</span>
+                <ul className="list-group">
+                    <li className="list-group-item">Cras justo odio</li>
+                    <li className="list-group-item">Dapibus ac facilisis in</li>
+                    <li className="list-group-item">Morbi leo risus</li>
+                    <li className="list-group-item">Porta ac consectetur ac</li>
+                    <li className="list-group-item">Vestibulum at eros</li>
+                </ul>
                 <table className="table">
                     <thead>
                         <tr>
