@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Like from "./common/Like";
 
-
 export default class Movies extends Component {
     render() {
         if (this.props.movies.length === 0)
@@ -36,7 +35,9 @@ export default class Movies extends Component {
                                 <td>
                                     <button
                                         className="btn btn-danger"
-                                        onClick={() => this.props.onDelete(movie)}
+                                        onClick={() =>
+                                            this.props.onDelete(movie)
+                                        }
                                     >
                                         Delete
                                     </button>
