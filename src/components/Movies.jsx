@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Pagination from "./common/Pagination";
 import { getMovies, getMovie } from "./fakeGenreService";
+import PropTypes from "prop-types";
 import Like from "./common/Like";
+import { paginate } from "../utils/paginate";
 
 export default class Movies extends Component {
     state = {
         movies: getMovies(),
-        pageSize: 4,
+        pageSize: 3,
         currentPage: 1,
     };
     handleDelete = (movie) => {
@@ -31,8 +33,9 @@ export default class Movies extends Component {
 
     render() {
         const { length: count } = this.state.movies;
-        const { pageSize, currentPage } = this.state;
+        const { pageSize, currentPage, movies: allMovies } = this.state;
         if (count === 0) return <div>There're no movies</div>;
+        const movies = paginate(allMovies, currentPage, pageSize);
         return (
             <React.Fragment>
                 <span>There're {count} movies</span>
@@ -48,7 +51,7 @@ export default class Movies extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.movies.map((movie) => (
+                        {movies.map((movie) => (
                             <tr key={movie.id}>
                                 <td>{movie.title}</td>
                                 <td>{movie.genre}</td>
@@ -82,3 +85,9 @@ export default class Movies extends Component {
         );
     }
 }
+Pagination.propTypes = {
+    itemsCount: PropTypes.number.isRequired,
+    pageSize: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired,
+};
