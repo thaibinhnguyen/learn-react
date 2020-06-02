@@ -2,17 +2,17 @@ import React from "react";
 
 export default function Filtering({
     genres,
-    onChangeGenre,
-    currentGenre,
+    onSelectGenre,
+    selectedGenre,
     textProperty,
 }) {
     return (
         <ul className="list-group">
             <li
                 style={{ cursor: "pointer" }}
-                onClick={() => onChangeGenre("All genres")}
+                onClick={() => onSelectGenre("All genres")}
                 className={
-                    currentGenre === "All genres"
+                    selectedGenre === "All genres"
                         ? "list-group-item active"
                         : "list-group-item"
                 }
@@ -23,9 +23,9 @@ export default function Filtering({
                 <li
                     style={{ cursor: "pointer" }}
                     key={index}
-                    onClick={() => onChangeGenre(genre[textProperty])}
+                    onClick={() => onSelectGenre(genre[textProperty])}
                     className={
-                        genre[textProperty] === currentGenre
+                        genre[textProperty] === selectedGenre
                             ? "list-group-item active"
                             : "list-group-item"
                     }
