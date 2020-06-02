@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function Filtering({ genres, onChangeGenre, currentGenre }) {
+export default function Filtering({
+    genres,
+    onChangeGenre,
+    currentGenre,
+    textProperty,
+}) {
     return (
         <ul className="list-group">
             <li
@@ -14,20 +19,23 @@ export default function Filtering({ genres, onChangeGenre, currentGenre }) {
             >
                 All genres
             </li>
-            {genres.map((genre) => (
+            {genres.map((genre, index) => (
                 <li
                     style={{ cursor: "pointer" }}
-                    key={genre.name}
-                    onClick={() => onChangeGenre(genre.name)}
+                    key={index}
+                    onClick={() => onChangeGenre(genre[textProperty])}
                     className={
-                        genre.name === currentGenre
+                        genre[textProperty] === currentGenre
                             ? "list-group-item active"
                             : "list-group-item"
                     }
                 >
-                    {genre.name}
+                    {genre[textProperty]}
                 </li>
             ))}
         </ul>
     );
 }
+Filtering.defaultProps = {
+    textProperty: "name",
+};
