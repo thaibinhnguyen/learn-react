@@ -9,13 +9,16 @@ import { paginate } from "../utils/paginate";
 
 export default class Movies extends Component {
     state = {
-        movies: getMovies(),
+        movies: [],
         pageSize: 3,
         currentPage: 1,
-        genres: getGenres(),
+        genres: [],
         currentGenre: "All genres",
         sorting: "none",
     };
+    componentDidMount() {
+        this.setState({ movies: getMovies(), genres: getGenres() });
+    }
     handleDelete = (movie) => {
         let movieDeleted = getMovie(movie.id);
         let listMovies = this.state.movies.filter(
