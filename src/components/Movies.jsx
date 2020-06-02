@@ -49,7 +49,7 @@ export default class Movies extends Component {
                 movie.filt = true;
             }
         });
-        this.setState({ movies });
+        this.setState({ movies, sorting: "none" });
     };
     handleSorting = (sorting) => {
         if (sorting === "up") {
@@ -75,7 +75,12 @@ export default class Movies extends Component {
         const { length: count } = moviesFiltered;
 
         if (count === 0) return <div>There're no movies</div>;
-        const movies = paginate(moviesFiltered, currentPage, pageSize);
+        let movies = paginate(moviesFiltered, currentPage, pageSize);
+        if (sorting === "up") {
+            movies.sort();
+        } else if (sorting === "down") {
+            movies.sort().reverse();
+        }
         return (
             <React.Fragment>
                 <div className="container">
@@ -102,13 +107,13 @@ export default class Movies extends Component {
                                             Title{" "}
                                             {sorting === "up" ? (
                                                 <i
-                                                    class="fa fa-arrow-up"
+                                                    className="fa fa-arrow-up"
                                                     aria-hidden="true"
                                                 />
                                             ) : (
                                                 sorting === "down" && (
                                                     <i
-                                                        class="fa fa-arrow-down"
+                                                        className="fa fa-arrow-down"
                                                         aria-hidden="true"
                                                     />
                                                 )
