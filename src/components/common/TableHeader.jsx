@@ -16,6 +16,7 @@ export default class TableHeader extends Component {
                 <tr>
                     {columns.map((column) => (
                         <th
+                            className="clickable"
                             key={column.path || column.key}
                             onClick={() => onSorting(sorting, column.path)}
                         >

@@ -56,12 +56,20 @@ export default class Movies extends Component {
         this.setState({ movies, sorting: "none" });
     };
     handleSorting = (sorting, type) => {
-        if (sorting.sortingState === "up") {
-            const updatedSorting = { sortingState: "down", sortingType: type };
-            this.setState({ sorting: updatedSorting });
-        } else {
-            const updatedSorting = { sortingState: "up", sortingType: type };
-            this.setState({ sorting: updatedSorting });
+        if (type) {
+            if (sorting.sortingState === "up") {
+                const updatedSorting = {
+                    sortingState: "down",
+                    sortingType: type,
+                };
+                this.setState({ sorting: updatedSorting });
+            } else {
+                const updatedSorting = {
+                    sortingState: "up",
+                    sortingType: type,
+                };
+                this.setState({ sorting: updatedSorting });
+            }
         }
     };
     render() {
