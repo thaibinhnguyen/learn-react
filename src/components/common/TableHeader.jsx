@@ -14,8 +14,11 @@ export default class TableHeader extends Component {
         return (
             <thead>
                 <tr>
-                    {columns.map((column) => (
-                        <th onClick={() => onSorting(sorting, column.path)}>
+                    {columns.map((column, index) => (
+                        <th
+                            key={index}
+                            onClick={() => onSorting(sorting, column.path)}
+                        >
                             {column.label}{" "}
                             {this.displayArrow(sorting, column.path)}
                         </th>

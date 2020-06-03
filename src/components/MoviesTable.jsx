@@ -8,6 +8,8 @@ export default class MoviesTable extends Component {
         { path: "genre", label: "Genre" },
         { path: "stock", label: "Stock" },
         { path: "rate", label: "Rate" },
+        {},
+        {},
     ];
     render() {
         const { movies, onSorting, sorting, onLike, onDelete } = this.props;
