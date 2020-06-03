@@ -86,14 +86,12 @@ export default class Movies extends Component {
             moviesFiltered.sort((current, next) =>
                 current[sortingType] > next[sortingType] ? 1 : -1
             );
-            console.log(moviesFiltered);
         } else if (sortingState === "down") {
             moviesFiltered
                 .sort((current, next) =>
                     current[sortingType] > next[sortingType] ? 1 : -1
                 )
                 .reverse();
-            console.log("reverse", moviesFiltered);
         }
         let movies = paginate(moviesFiltered, currentPage, pageSize);
 
