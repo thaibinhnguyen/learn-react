@@ -40,7 +40,7 @@ export default class Movies extends Component {
         this.setState({ currentPage: page });
     };
     handleSelectGenre = (genre) => {
-        console.log(genre);
+        // console.log(genre);
         this.setState({ currentGenre: genre });
         let movies = [...this.state.movies];
         for (let i = 0; i < movies.length; i++) {
