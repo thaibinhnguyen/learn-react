@@ -72,24 +72,20 @@ export default class Movies extends Component {
             }
         }
     };
-    render() {
+    getPageData = () => {
         const {
             pageSize,
             currentPage,
-            movies: allMovies,
-            currentGenre,
-            genres,
             sorting,
+            currentGenre,
+            movies: allMovies,
         } = this.state;
+        const { sortingState, sortingType } = sorting;
         const moviesFiltered = allMovies.filter(
             (movie) =>
                 movie.genre.includes(currentGenre) ||
                 currentGenre === "All genres"
         );
-        const { length: count } = moviesFiltered;
-
-        if (count === 0) return <div>There're no movies</div>;
-        const { sortingState, sortingType } = sorting;
         if (sortingState === "up") {
             moviesFiltered.sort((current, next) =>
                 current[sortingType] > next[sortingType] ? 1 : -1
@@ -102,7 +98,21 @@ export default class Movies extends Component {
                 .reverse();
         }
         let movies = paginate(moviesFiltered, currentPage, pageSize);
+        return { totalCount: moviesFiltered.length, data: movies };
+    };
+    render() {
+        const {
+            pageSize,
+            currentPage,
+            currentGenre,
+            genres,
+            sorting,
+        } = this.state;
 
+        // const { length: count } = moviesFiltered;
+
+        const { totalCount, data: movies } = this.getPageData();
+        if (totalCount === 0) return <div>There're no movies</div>;
         return (
             <React.Fragment>
                 <div className="container">
@@ -115,7 +125,7 @@ export default class Movies extends Component {
                             />
                         </div>
                         <div className="col-9">
-                            <span>There're {count} movies</span>
+                            <span>There're {totalCount} movies</span>
 
                             <MoviesTable
                                 movies={movies}
@@ -125,7 +135,7 @@ export default class Movies extends Component {
                                 onDelete={this.handleDelete}
                             />
                             <Pagination
-                                itemsCount={count}
+                                itemsCount={totalCount}
                                 pageSize={pageSize}
                                 onPageChange={this.handlePageChange}
                                 currentPage={currentPage}
