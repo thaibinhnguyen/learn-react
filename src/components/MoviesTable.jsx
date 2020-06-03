@@ -8,26 +8,30 @@ export default function MoviesTable({
     onLike,
     onDelete,
 }) {
+    let displayArrow = (sorting, type) => {
+        if (sorting.sortingType === type) {
+            if (sorting.sortingState === "up")
+                return <i className="fa fa-arrow-up" aria-hidden="true" />;
+            if (sorting.sortingState === "down")
+                return <i className="fa fa-arrow-down" aria-hidden="true" />;
+        }
+    };
     return (
         <table className="table">
             <thead>
                 <tr>
-                    <th scope="col" onClick={() => onSorting(sorting)}>
-                        Title{" "}
-                        {sorting === "up" ? (
-                            <i className="fa fa-arrow-up" aria-hidden="true" />
-                        ) : (
-                            sorting === "down" && (
-                                <i
-                                    className="fa fa-arrow-down"
-                                    aria-hidden="true"
-                                />
-                            )
-                        )}
+                    <th scope="col" onClick={() => onSorting(sorting, "title")}>
+                        Title {displayArrow(sorting, "title")}
                     </th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Rate</th>
+                    <th scope="col" onClick={() => onSorting(sorting, "genre")}>
+                        Genre {displayArrow(sorting, "genre")}
+                    </th>
+                    <th scope="col" onClick={() => onSorting(sorting, "stock")}>
+                        Stock {displayArrow(sorting, "stock")}
+                    </th>
+                    <th scope="col" onClick={() => onSorting(sorting, "rate")}>
+                        Rate {displayArrow(sorting, "rate")}
+                    </th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>

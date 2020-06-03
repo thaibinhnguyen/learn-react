@@ -15,7 +15,7 @@ export default class Movies extends Component {
         currentPage: 1,
         genres: [],
         currentGenre: "All genres",
-        sorting: "none",
+        sorting: { sortingState: "none", sortingType: null },
     };
     componentDidMount() {
         this.setState({ movies: getMovies(), genres: getGenres() });
@@ -55,11 +55,13 @@ export default class Movies extends Component {
         });
         this.setState({ movies, sorting: "none" });
     };
-    handleSorting = (sorting) => {
-        if (sorting === "up") {
-            this.setState({ sorting: "down" });
+    handleSorting = (sorting, type) => {
+        if (sorting.sortingState === "up") {
+            const updatedSorting = { sortingState: "down", sortingType: type };
+            this.setState({ sorting: updatedSorting });
         } else {
-            this.setState({ sorting: "up" });
+            const updatedSorting = { sortingState: "up", sortingType: type };
+            this.setState({ sorting: updatedSorting });
         }
     };
     render() {
@@ -79,12 +81,22 @@ export default class Movies extends Component {
         const { length: count } = moviesFiltered;
 
         if (count === 0) return <div>There're no movies</div>;
-        let movies = paginate(moviesFiltered, currentPage, pageSize);
-        if (sorting === "up") {
-            movies.sort();
-        } else if (sorting === "down") {
-            movies.sort().reverse();
+        const { sortingState, sortingType } = sorting;
+        if (sortingState === "up") {
+            moviesFiltered.sort((current, next) =>
+                current[sortingType] > next[sortingType] ? 1 : -1
+            );
+            console.log(moviesFiltered);
+        } else if (sortingState === "down") {
+            moviesFiltered
+                .sort((current, next) =>
+                    current[sortingType] > next[sortingType] ? 1 : -1
+                )
+                .reverse();
+            console.log("reverse", moviesFiltered);
         }
+        let movies = paginate(moviesFiltered, currentPage, pageSize);
+
         return (
             <React.Fragment>
                 <div className="container">
