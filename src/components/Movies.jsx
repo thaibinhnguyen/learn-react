@@ -3,7 +3,7 @@ import Pagination from "./common/Pagination";
 import { getMovies, getMovie } from "./fakeMovieService";
 import { getGenres } from "./fakeGenreService";
 import PropTypes from "prop-types";
-
+import NavBar from "./common/Navbar";
 import MoviesTable from "./MoviesTable";
 import Filtering from "./common/Filtering";
 import { paginate } from "../utils/paginate";
@@ -116,6 +116,7 @@ export default class Movies extends Component {
         return (
             <React.Fragment>
                 <div className="container">
+                    <NavBar />
                     <div className="row">
                         <div className="col-3">
                             <Filtering

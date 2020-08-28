@@ -21,28 +21,26 @@ export default function Navbar() {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <NavLink className="nav-link" to="#">
-                            Home <span className="sr-only">(current)</span>
+                        <NavLink className="nav-link" to="/movies">
+                            Movies
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="#">
-                            Features
+                        <NavLink className="nav-link" to="/customers">
+                            Customers
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="#">
-                            Pricing
+                        <NavLink className="nav-link" to="/rentals">
+                            Rentals
                         </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink
                             className="nav-link"
-                            to="#"
-                            tabindex="-1"
-                            aria-disabled="true"
+                            to="/login"
                         >
-                            Disabled
+                            Login
                         </NavLink>
                     </li>
                 </ul>

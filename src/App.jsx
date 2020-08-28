@@ -4,6 +4,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Customers from "./components/Customers";
 import Rentals from "./components/Rentals";
 import NotFound from "./components/NotFound";
+import LoginForm from "./components/LoginForm";
 
 export default class App extends Component {
     render() {
@@ -11,6 +12,7 @@ export default class App extends Component {
             <React.Fragment>
                 <main className="main">
                     <Switch>
+                        <Route path="/login" component={LoginForm}></Route>
                         <Route path="/movies" component={Movies}></Route>
                         <Route path="/customers" component={Customers}></Route>
                         <Route path="/rentals" component={Rentals}></Route>
