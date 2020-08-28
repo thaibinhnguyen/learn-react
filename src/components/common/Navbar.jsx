@@ -1,12 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">
-                Navbar
-            </a>
+            <Link className="navbar-brand" to="/">
+                Vidly
+            </Link>
             <button
                 className="navbar-toggler"
                 type="button"
@@ -36,10 +36,7 @@ export default function Navbar() {
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink
-                            className="nav-link"
-                            to="/login"
-                        >
+                        <NavLink className="nav-link" to="/login">
                             Login
                         </NavLink>
                     </li>
