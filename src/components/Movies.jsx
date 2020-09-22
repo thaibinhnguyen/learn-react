@@ -116,7 +116,7 @@ export default class Movies extends Component {
         return (
             <React.Fragment>
                 <div className="container">
-                    <NavBar />
+                    {/* <NavBar /> */}
                     <div className="row">
                         <div className="col-3">
                             <Filtering
