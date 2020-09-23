@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Pagination from "./common/Pagination";
-import { getMovies, getMovie } from "./fakeMovieService";
-import { getGenres } from "./fakeGenreService";
+import { getMovies, getMovie } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import PropTypes from "prop-types";
 import NavBar from "./common/Navbar";
 import MoviesTable from "./MoviesTable";
 import Filtering from "./common/Filtering";
 import { paginate } from "../utils/paginate";
-
+import { Link } from "react-router-dom";
 export default class Movies extends Component {
     state = {
         movies: [],
@@ -126,6 +126,8 @@ export default class Movies extends Component {
                             />
                         </div>
                         <div className="col-9">
+                            <Link to="/movies/new" className="btn btn-primary">New movie</Link>
+                            <br />
                             <span>There're {totalCount} movies</span>
 
                             <MoviesTable

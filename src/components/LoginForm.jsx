@@ -17,7 +17,7 @@ export default class LoginForm extends Form {
         password: Joi.string().required().label('Password')
     }
     doSubmit = () => {
-        console.log("submitted");
+        console.log("created");
     }
     render() {
         return (
